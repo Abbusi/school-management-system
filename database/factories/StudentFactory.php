@@ -1,31 +1,39 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Student::class, function (Faker $faker) {
+use App\Models\Student;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-    $user = factory(App\User::class)->create();
-    return [
-        'user_id' => $user->id,
-        'name' => $faker->name($gender = 'male'|'female'),
-        'dob' => $faker->dateTimeBetween($startDate = '-20 years', $endDate = 'now', $timezone = "Asia/Dhaka")->format('d/m/Y'),
-        'gender' => rand(1,2),
-        'religion' => rand(1,5),
-        'blood_group' => rand(1,8),
-        'nationality' => substr($faker->country, 0 , 48),
-        'photo' => null,
-        'email' => $user->email,
-        'phone_no' => $faker->e164PhoneNumber,
-        'extra_activity' => '',
-        'note' => '',
-        'father_name' => $faker->name($gender = 'male'),
-        'father_phone_no' => $faker->e164PhoneNumber,
-        'mother_name' => $faker->name($gender = 'female'),
-        'mother_phone_no' => $faker->e164PhoneNumber,
-        'guardian' => null,
-        'guardian_phone_no' => null,
-        'present_address' => $faker->address,
-        'permanent_address' => $faker->address,
-        'status' => '1',
-    ];
-});
+class StudentFactory extends Factory
+{
+    protected $model = Student::class;
+
+    public function definition(): array
+    {
+        $user = \Database\Factories\UserFactory::new()->create();
+        return [
+            'user_id' => $user->id,
+            'name' => fake()->name(),
+            'dob' => fake()->dateTimeBetween('-20 years', 'now', 'Asia/Dhaka')->format('d/m/Y'),
+            'gender' => rand(1,2),
+            'religion' => rand(1,5),
+            'blood_group' => rand(1,8),
+            'nationality' => substr(fake()->country(), 0, 48),
+            'photo' => null,
+            'email' => $user->email,
+            'phone_no' => fake()->e164PhoneNumber(),
+            'extra_activity' => '',
+            'note' => '',
+            'father_name' => fake()->name('male'),
+            'father_phone_no' => fake()->e164PhoneNumber(),
+            'mother_name' => fake()->name('female'),
+            'mother_phone_no' => fake()->e164PhoneNumber(),
+            'guardian' => null,
+            'guardian_phone_no' => null,
+            'present_address' => fake()->address(),
+            'permanent_address' => fake()->address(),
+            'status' => '1',
+        ];
+    }
+}

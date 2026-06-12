@@ -11,6 +11,20 @@
 |
 */
 
+if (!function_exists('factory')) {
+    function factory($class, $amount = null) {
+        if (strpos($class, 'App\\Models\\') !== 0 && strpos($class, 'App\\') === 0) {
+            $class = 'App\\Models\\' . substr($class, 4);
+        }
+        $factoryClass = 'Database\\Factories\\' . class_basename($class) . 'Factory';
+        $factory = $factoryClass::new();
+        if ($amount !== null) {
+            $factory = $factory->count($amount);
+        }
+        return $factory;
+    }
+}
+
 Artisan::command('fresh-install {--d|with-data : Seed demo data}', function () {
     $storageLinkPath = public_path('storage');
     if(is_link($storageLinkPath)){
@@ -32,7 +46,7 @@ Artisan::command('fresh-install {--d|with-data : Seed demo data}', function () {
 })->describe('Setup fresh copy of CloudSchool with or without demo data.');
 
 //clear all caches
-Artisan::command('cache:all-clear}', function () {
+Artisan::command('cache:all-clear', function () {
     //clear cache
     $this->comment('Clearing all type of caches...');
     $this->call('view:clear');

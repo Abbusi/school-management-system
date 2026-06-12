@@ -39,3 +39,6 @@ class CreateUsersPermissionsTable extends Migration
         Schema::dropIfExists('users_permissions');
     }
 }
+
+
+

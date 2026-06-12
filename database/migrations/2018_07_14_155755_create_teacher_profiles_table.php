@@ -39,3 +39,6 @@ class CreateTeacherProfilesTable extends Migration
         Schema::dropIfExists('teacher_profiles');
     }
 }
+
+
+

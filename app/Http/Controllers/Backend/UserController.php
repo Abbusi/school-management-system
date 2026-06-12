@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\AcademicYear;
-use App\Employee;
-use App\IClass;
-use App\PasswordReset;
-use App\Permission;
-use App\Registration;
-use App\Role;
-use App\Subject;
-use App\User;
-use App\UserRole;
+use App\Models\AcademicYear;
+use App\Models\Employee;
+use App\Models\IClass;
+use App\Models\PasswordReset;
+use App\Models\Permission;
+use App\Models\Registration;
+use App\Models\Role;
+use App\Models\Subject;
+use App\Models\User;
+use App\Models\UserRole;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -221,18 +221,33 @@ class UserController extends Controller
      */
     public function dashboard(Request $request)
     {
-        $userRoleId = session('user_role_id',0);
+        if (!session()->has('user_role_id') && auth()->check() && auth()->user()->role) {
+            session(['user_role_id' => auth()->user()->role->role_id]);
+        }
+        $userRoleId = session('user_role_id', 0);
         $teachers = 0;
         $employee = 0;
         $students = 0;
         $subjects = 0;
+        $studentDelta = '0 nouveau';
+        $teacherDelta = '0 nouveau';
+        $employeeDelta = '0 nouveau';
+        $subjectDelta = '0 nouveau';
         $attendanceChartPresentData = [];
         $attendanceChartAbsentData = [];
 
         //only admin
         if($userRoleId == AppHelper::USER_ADMIN){
             //these models records count
-            [$teachers, $employee, $students, $subjects] = $this->getStatisticData();
+            $stats = $this->getStatisticData();
+            $teachers = $stats['teachers'];
+            $teacherDelta = $stats['teacherDelta'];
+            $employee = $stats['employee'];
+            $employeeDelta = $stats['employeeDelta'];
+            $students = $stats['students'];
+            $studentDelta = $stats['studentDelta'];
+            $subjects = $stats['subjects'];
+            $subjectDelta = $stats['subjectDelta'];
         }
 
         //all user except students
@@ -243,9 +258,13 @@ class UserController extends Controller
 
         return view('backend.user.dashboard', compact(
             'teachers',
+            'teacherDelta',
             'employee',
+            'employeeDelta',
             'students',
+            'studentDelta',
             'subjects',
+            'subjectDelta',
             'userRoleId',
             'attendanceChartPresentData',
             'attendanceChartAbsentData'
@@ -1024,59 +1043,97 @@ class UserController extends Controller
        return $academicYearId;
    }
 
-   private function getStatisticData() {
-       $teachers = Cache::rememberForever('teacherCount' , function () {
-           return   Employee::where('status', AppHelper::ACTIVE)->where('role_id', AppHelper::EMP_TEACHER)->count();
-       });
+    private function getGrowthDelta($total, $newCount, $timeLabel = 'ce mois') {
+        if ($newCount <= 0) {
+            return '0 nouveau';
+        }
+        $old = $total - $newCount;
+        if ($old <= 0) {
+            return "↑ 100% {$timeLabel}";
+        }
+        $pct = ($newCount / $old) * 100;
+        $formatted = number_format($pct, $pct == (int)$pct ? 0 : 1, ',', '');
+        return "↑ {$formatted}% {$timeLabel}";
+    }
 
-       $employee = Cache::rememberForever('employeeCount' , function () {
-           return Employee::where('status', AppHelper::ACTIVE)->count();
-       });
-       $academicYearId = $this->getAcademicYearForDashboard();
-       $students = Cache::rememberForever('studentCount' , function () use($academicYearId) {
-           return Registration::where('status', AppHelper::ACTIVE)
-               ->where('academic_year_id', $academicYearId)
-               ->count();
-       });
-       $subjects = Cache::rememberForever('SubjectCount' , function () {
-           return Subject::where('status', AppHelper::ACTIVE)->count();
-       });
+    private function getStatisticData() {
+        return Cache::remember('dashboardStats_v2', 60, function() {
+            $academicYearId = $this->getAcademicYearForDashboard();
+            $thirtyDaysAgo = Carbon::now()->subDays(30);
 
-       return [$teachers, $employee, $students, $subjects];
-   }
+            $teachers = Employee::where('status', AppHelper::ACTIVE)->where('role_id', AppHelper::EMP_TEACHER)->count();
+            $newTeachers = Employee::where('status', AppHelper::ACTIVE)->where('role_id', AppHelper::EMP_TEACHER)
+                ->where('created_at', '>=', $thirtyDaysAgo)->count();
+
+            $employee = Employee::where('status', AppHelper::ACTIVE)->count();
+            $newEmployee = Employee::where('status', AppHelper::ACTIVE)
+                ->where('created_at', '>=', $thirtyDaysAgo)->count();
+
+            $students = Registration::where('status', AppHelper::ACTIVE)->where('academic_year_id', $academicYearId)->count();
+            $newStudents = Registration::where('status', AppHelper::ACTIVE)->where('academic_year_id', $academicYearId)
+                ->where('created_at', '>=', $thirtyDaysAgo)->count();
+
+            $subjects = Subject::where('status', AppHelper::ACTIVE)->count();
+            $newSubjects = Subject::where('status', AppHelper::ACTIVE)
+                ->where('created_at', '>=', $thirtyDaysAgo)->count();
+
+            $studentDelta = $this->getGrowthDelta($students, $newStudents, 'ce mois');
+            $teacherDelta = $this->getGrowthDelta($teachers, $newTeachers, 'ce mois');
+            $employeeDelta = $this->getGrowthDelta($employee, $newEmployee, 'ce mois');
+            $subjectDelta = $this->getGrowthDelta($subjects, $newSubjects, 'ce mois');
+
+            return [
+                'teachers' => $teachers, 'teacherDelta' => $teacherDelta,
+                'employee' => $employee, 'employeeDelta' => $employeeDelta,
+                'students' => $students, 'studentDelta' => $studentDelta,
+                'subjects' => $subjects, 'subjectDelta' => $subjectDelta,
+            ];
+        });
+    }
 
    private function getClassWiseTodayAttendanceCount() {
-       $academicYearId = $this->getAcademicYearForDashboard();
-       $iclasses = Cache::rememberForever('student_attendance_count' , function () use($academicYearId) {
-           return  IClass::where('status', AppHelper::ACTIVE)
-               ->with(['attendance' => function ($query) use ($academicYearId) {
-                   $query->selectRaw('class_id,present,count(registration_id) as total')
-                       ->where('academic_year_id', $academicYearId)
-                       ->whereDate('attendance_date', date('Y-m-d'))
-//                        ->whereDate('attendance_date', '2019-03-02')
-                       ->groupBy('class_id', 'present');
-               }])
-               ->select('id', 'name')
-               ->orderBy('order','asc')
-               ->get();
-       });
+        $academicYearId = $this->getAcademicYearForDashboard();
+        $iclasses = Cache::rememberForever('student_attendance_count' , function () use($academicYearId) {
+            $data = IClass::where('status', AppHelper::ACTIVE)
+                ->with(['attendance' => function ($query) use ($academicYearId) {
+                    $query->selectRaw('class_id,present,count(registration_id) as total')
+                        ->where('academic_year_id', $academicYearId)
+                        ->whereDate('attendance_date', date('Y-m-d'))
+                        ->groupBy('class_id', 'present');
+                }])
+                ->select('id', 'name')
+                ->orderBy('order','asc')
+                ->get();
 
-       $attendanceChartPresentData = [];
-       $attendanceChartAbsentData = [];
-       foreach ($iclasses as $iclass) {
-           $attendanceChartPresentData[$iclass->name] = 0;
-           $attendanceChartAbsentData[$iclass->name] = 0;
-           foreach ($iclass->attendance as $attendanceSummary) {
-               if ($attendanceSummary->present == "Present") {
-                   $attendanceChartPresentData[$iclass->name] = $attendanceSummary->total;
-               } else {
-                   $attendanceChartAbsentData[$iclass->name] = $attendanceSummary->total;
+            return $data->map(function($iclass) {
+                return [
+                    'name' => $iclass->name,
+                    'attendance' => $iclass->attendance->map(function($att) {
+                        return [
+                            'present' => $att->present,
+                            'total' => $att->total
+                        ];
+                    })->toArray()
+                ];
+            })->toArray();
+        });
 
-               }
-           }
-       }
+        $attendanceChartPresentData = [];
+        $attendanceChartAbsentData = [];
+        foreach ($iclasses as $iclass) {
+            $className = $iclass['name'];
+            $attendanceChartPresentData[$className] = 0;
+            $attendanceChartAbsentData[$className] = 0;
+            foreach ($iclass['attendance'] as $attendanceSummary) {
+                if ($attendanceSummary['present'] == "Present") {
+                    $attendanceChartPresentData[$className] = $attendanceSummary['total'];
+                } else {
+                    $attendanceChartAbsentData[$className] = $attendanceSummary['total'];
+                }
+            }
+        }
 
-       return [$attendanceChartPresentData, $attendanceChartAbsentData];
-   }
+        return [$attendanceChartPresentData, $attendanceChartAbsentData];
+    }
 
 }

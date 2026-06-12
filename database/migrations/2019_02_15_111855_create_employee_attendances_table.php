@@ -40,3 +40,6 @@ class CreateEmployeeAttendancesTable extends Migration
         Schema::dropIfExists('employee_attendances');
     }
 }
+
+
+

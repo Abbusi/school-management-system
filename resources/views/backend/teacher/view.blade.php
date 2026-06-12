@@ -49,13 +49,13 @@
                                     <h3 class="profile-username text-center">{{$teacher->name}}</h3>
                                     <p class="text-muted text-center">{{$teacher->designation}}</p>
                                     <ul class="list-group list-group-unbordered">
-                                        <li class="list-group-item" style="background-color: #FFF">
+                                        <li class="list-group-item">
                                             <b>ID Card No.</b> <a class="pull-right">{{$teacher->id_card}}</a>
                                         </li>
-                                        <li class="list-group-item" style="background-color: #FFF">
+                                        <li class="list-group-item">
                                             <b>Phone</b> <a class="pull-right">{{$teacher->phone_no}}</a>
                                         </li>
-                                        <li class="list-group-item" style="background-color: #FFF">
+                                        <li class="list-group-item">
                                             <b>Email</b> <a class="pull-right">{{$teacher->email}}</a>
                                         </li>
                                     </ul>

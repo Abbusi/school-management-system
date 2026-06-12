@@ -37,24 +37,16 @@ class ComposerServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\BackendMasterComposer'
         );
         View::composer(
-                    [
-                        'backend.report.layouts.master',
-                        'backend.report.layouts.header',
-                        'backend.report.layouts.footer',
-                    ],
-                    'App\Http\ViewComposers\ReportMasterComposer'
-                );
+            [
+                'backend.report.layouts.master',
+                'backend.report.layouts.header',
+                'backend.report.layouts.footer',
+            ],
+            'App\Http\ViewComposers\ReportMasterComposer'
+        );
 
-        \view()->share('default_academic_year', Cache::get('default_academic_year', 0));
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
+        view()->share('default_academic_year', Cache::get('default_academic_year', 0));
     }
 }
+
+

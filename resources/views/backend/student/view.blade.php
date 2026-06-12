@@ -62,16 +62,16 @@
                                 <h3 class="profile-username text-center">{{$student->student->name}}</h3>
                                 <p class="text-muted text-center">{{$student->class->name}}</p>
                                 <ul class="list-group list-group-unbordered">
-                                    <li class="list-group-item" style="background-color: #FFF">
+                                    <li class="list-group-item">
                                         <b>Registration No.</b> <a class="pull-right">{{$student->regi_no}}</a>
                                     </li>
-                                    <li class="list-group-item" style="background-color: #FFF">
+                                    <li class="list-group-item">
                                         <b>ID Card No.</b> <a class="pull-right">{{$student->card_no}}</a>
                                     </li>
-                                    <li class="list-group-item" style="background-color: #FFF">
+                                    <li class="list-group-item">
                                         <b>Phone</b> <a class="pull-right">{{$student->student->phone_no}}</a>
                                     </li>
-                                    <li class="list-group-item" style="background-color: #FFF">
+                                    <li class="list-group-item">
                                         <b>Email</b> <a class="pull-right">{{$student->student->email}}</a>
                                     </li>
                                 </ul>
@@ -90,7 +90,7 @@
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="information">
-                            <p class="text-info" style="font-size: 16px;border-bottom: 1px solid #eee;">Personal Info:</p>
+                            <p class="section-title">Personal Info:</p>
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="">Full Name</label>
@@ -161,7 +161,7 @@
                                     <p for="">: {{$student->student->note}}</p>
                                 </div>
                             </div>
-                            <p class="text-info" style="font-size: 16px;border-bottom: 1px solid #eee;">Parents Info:</p>
+                            <p class="section-title">Parents Info:</p>
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="">Father Name </label>
@@ -218,7 +218,7 @@
                                     <p for="">: {{$student->student->permanent_address}}</p>
                                 </div>
                             </div>
-                            <p class="text-info" style="font-size: 16px;border-bottom: 1px solid #eee;">Academic Info:</p>
+                            <p class="section-title">Academic Info:</p>
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="">Academic Year</label>

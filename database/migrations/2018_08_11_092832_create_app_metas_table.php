@@ -33,3 +33,6 @@ class CreateAppMetasTable extends Migration
         Schema::dropIfExists('app_metas');
     }
 }
+
+
+

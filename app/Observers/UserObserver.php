@@ -36,3 +36,6 @@ class UserObserver
         Cache::add("user.{$user->id}", $user, now()->addMinutes(60));
     }
 }
+
+
+

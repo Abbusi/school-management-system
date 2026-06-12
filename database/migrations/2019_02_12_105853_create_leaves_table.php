@@ -40,3 +40,6 @@ class CreateLeavesTable extends Migration
         Schema::dropIfExists('leaves');
     }
 }
+
+
+

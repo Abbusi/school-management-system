@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Employee;
+use App\Models\Employee;
 use App\Http\Helpers\AppHelper;
-use App\Leave;
+use App\Models\Leave;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -253,3 +253,6 @@ class LeaveController extends Controller
         return redirect()->route('hrm.leave.index')->with('success', 'Leave deleted!');
     }
 }
+
+
+

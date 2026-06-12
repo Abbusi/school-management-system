@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\AcademicYear;
-use App\Exam;
-use App\ExamRule;
-use App\Grade;
-use App\Mark;
-use App\Registration;
-use App\Result;
-use App\Section;
-use App\Subject;
+use App\Models\AcademicYear;
+use App\Models\Exam;
+use App\Models\ExamRule;
+use App\Models\Grade;
+use App\Models\Mark;
+use App\Models\Registration;
+use App\Models\Result;
+use App\Models\Section;
+use App\Models\Subject;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Http\Helpers\AppHelper;
-use App\IClass;
+use App\Models\IClass;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -1652,3 +1652,6 @@ class MarkController extends Controller
         return redirect()->route('promotion.create')->with('success', $msg);
     }
 }
+
+
+

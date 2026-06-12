@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\AcademicYear;
+use App\Models\AcademicYear;
 use App\Http\Helpers\AppHelper;
-use App\IClass;
-use App\Registration;
-use App\Section;
-use App\StudentAttendance;
+use App\Models\IClass;
+use App\Models\Registration;
+use App\Models\Section;
+use App\Models\StudentAttendance;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -373,3 +373,6 @@ class StudentAttendanceController extends Controller
         ];
     }
 }
+
+
+

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\ClassProfile;
+use App\Models\ClassProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -117,3 +117,6 @@ class ClassProfileController extends Controller
         return redirect()->route('class_profile.index')->with('success', 'Class profile deleted.');
     }
 }
+
+
+

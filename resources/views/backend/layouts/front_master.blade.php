@@ -14,14 +14,15 @@
     <!-- Favicon png -->
     <link rel="icon" href="@if(isset($appSettings['institute_settings']['favicon'])){{asset('storage/logo/'.$appSettings['institute_settings']['favicon'])}} @else{{ asset('images/favicon.png') }}@endif" type="image/png">
     <!-- Pace loading -->
-    <script src="{{ asset(mix('/js/pace.js')) }}"></script>
-    <link href="{{ asset(mix('/css/pace.css')) }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('js/pace.js') }}"></script>
+    <link href="{{ asset('css/pace.css') }}" rel="stylesheet" type="text/css">
     <!-- vendor libraries CSS -->
-    <link href="{{ asset(mix('/css/vendor.css')) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet" type="text/css">
     <!-- theme CSS -->
-    <link href="{{ asset(mix('/css/theme.css')) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/theme.css') }}" rel="stylesheet" type="text/css">
     <!-- app CSS -->
-    <link href="{{ asset(mix('/css/app.css')) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/faxeed-backend.css') }}" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,11 +45,11 @@
 	<!-- END CHILD PAGE-->	
 
     <!-- webpack menifest js -->
-    <script src="{{ asset(mix('/js/manifest.js')) }}"></script>
+    <script src="{{ asset('js/manifest.js') }}"></script>
      <!-- vendor libaries js -->
-    <script src="{{ asset(mix('/js/vendor.js')) }}"></script>
+    <script src="{{ asset('js/vendor.js') }}"></script>
      <!-- app js -->
-    <script src="{{ asset(mix('/js/app.js')) }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
      <!-- Extra js from child page -->
      @yield("extraScript")

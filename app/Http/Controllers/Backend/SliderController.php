@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Slider;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -95,3 +95,6 @@ class SliderController extends Controller
         return redirect()->route('slider.index')->with('success', 'Slider item deleted.');
     }
 }
+
+
+

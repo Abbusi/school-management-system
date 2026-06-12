@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\AppHelper;
-use App\Registration;
-use App\Section;
-use App\Student;
-use App\Subject;
+use App\Models\Registration;
+use App\Models\Section;
+use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
-use App\IClass;
-use App\Employee;
+use App\Models\IClass;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -496,3 +496,6 @@ class AcademicController extends Controller
 
 
 }
+
+
+

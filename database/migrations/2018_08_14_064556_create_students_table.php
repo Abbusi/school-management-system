@@ -70,3 +70,6 @@ class CreateStudentsTable extends Migration
         Schema::dropIfExists('students');
     }
 }
+
+
+

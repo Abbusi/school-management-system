@@ -54,22 +54,22 @@
                                     <h3 class="profile-username text-center">{{$employee->name}}</h3>
                                     <p class="text-muted text-center">{{$employee->designation}}</p>
                                     <ul class="list-group list-group-unbordered">
-                                        <li class="list-group-item" style="background-color: #FFF">
+                                        <li class="list-group-item">
                                             <b>ID Card No.</b> <a class="pull-right">{{$employee->id_card}}</a>
                                         </li>
-                                        <li class="list-group-item" style="background-color: #FFF">
+                                        <li class="list-group-item">
                                             <b>Phone</b> <a class="pull-right">{{$employee->phone_no}}</a>
                                         </li>
-                                        <li class="list-group-item" style="background-color: #FFF">
+                                        <li class="list-group-item">
                                             <b>Email</b> <a class="pull-right">{{$employee->email}}</a>
                                         </li>
-                                        <li class="list-group-item" style="background-color: #FFF">
+                                        <li class="list-group-item">
                                             <b>Shift</b> <a class="pull-right">{{$employee->shift}}</a>
                                         </li>
-                                        <li class="list-group-item" style="background-color: #FFF">
+                                        <li class="list-group-item">
                                             <b>Duty Start</b> <a class="pull-right">@if($employee->duty_start){{$employee->duty_start->format('h:i a')}} @endif</a>
                                         </li>
-                                        <li class="list-group-item" style="background-color: #FFF">
+                                        <li class="list-group-item">
                                             <b>Duty End</b> <a class="pull-right">@if($employee->duty_end){{$employee->duty_end->format('h:i a')}} @endif</a>
                                         </li>
                                     </ul>

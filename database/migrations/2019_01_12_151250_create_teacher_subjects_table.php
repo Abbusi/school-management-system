@@ -33,3 +33,6 @@ class CreateTeacherSubjectsTable extends Migration
         Schema::dropIfExists('teacher_subjects');
     }
 }
+
+
+

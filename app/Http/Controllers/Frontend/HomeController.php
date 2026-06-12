@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\ClassProfile;
-use App\Event;
+use App\Models\ClassProfile;
+use App\Models\Event;
 use App\Http\Controllers\Controller;
-use App\SiteMeta;
-use App\Slider;
-use App\AboutContent;
-use App\AboutSlider;
-use App\TeacherProfile;
-use App\Testimonial;
+use App\Models\SiteMeta;
+use App\Models\Slider;
+use App\Models\AboutContent;
+use App\Models\AboutSlider;
+use App\Models\TeacherProfile;
+use App\Models\Testimonial;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -237,3 +237,6 @@ class HomeController extends Controller
 
     }
 }
+
+
+

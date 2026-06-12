@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Helpers\AppHelper;
-use App\Section;
-use App\Subject;
-use App\User;
-use App\UserRole;
+use App\Models\Section;
+use App\Models\Subject;
+use App\Models\User;
+use App\Models\UserRole;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Employee;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -444,3 +444,6 @@ class TeacherController extends Controller
 
     }
 }
+
+
+

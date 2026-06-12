@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\AcademicYear;
-use App\Exam;
+use App\Models\AcademicYear;
+use App\Models\Exam;
 use App\Http\Helpers\AppHelper;
-use App\IClass;
-use App\Registration;
-use App\Section;
-use App\Student;
-use App\StudentAttendance;
-use App\Subject;
-use App\User;
+use App\Models\IClass;
+use App\Models\Registration;
+use App\Models\Section;
+use App\Models\Student;
+use App\Models\StudentAttendance;
+use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -321,3 +321,6 @@ class PublicController extends Controller
         return response()->json($settings);
     }
 }
+
+
+

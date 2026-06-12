@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\AppMeta;
-use App\Employee;
+use App\Models\AppMeta;
+use App\Models\Employee;
 use App\Http\Helpers\AppHelper;
-use App\Leave;
-use App\Role;
-use App\User;
-use App\UserRole;
+use App\Models\Leave;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\UserRole;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -532,3 +532,6 @@ class EmployeeController extends Controller
         ));
     }
 }
+
+
+

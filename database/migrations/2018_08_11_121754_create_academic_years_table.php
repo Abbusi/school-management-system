@@ -36,3 +36,6 @@ class CreateAcademicYearsTable extends Migration
         Schema::dropIfExists('academic_years');
     }
 }
+
+
+

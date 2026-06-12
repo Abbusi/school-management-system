@@ -14,18 +14,19 @@
     <!-- Favicon png -->
     <link rel="shortcut icon" href="@if(isset($appSettings['institute_settings']['favicon'])){{asset('storage/logo/'.$appSettings['institute_settings']['favicon'])}} @else{{ asset('images/favicon.png') }}@endif">
     <!-- Pace loading -->
-    <script src="{{ asset(mix('/js/pace.js')) }}"></script>
-    <link href="{{ asset(mix('/css/pace.css')) }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('js/pace.js') }}"></script>
+    <link href="{{ asset('css/pace.css') }}" rel="stylesheet" type="text/css">
 
     <!-- vendor libraries CSS -->
-    <link href="{{ asset(mix('/css/vendor.css')) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet" type="text/css">
     <!-- theme CSS -->
-    <link href="{{ asset(mix('/css/theme.css')) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/theme.css') }}" rel="stylesheet" type="text/css">
     <!-- app CSS -->
-    <link href="{{ asset(mix('/css/app.css')) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/faxeed-backend.css') }}?v=3.5" rel="stylesheet" type="text/css">
 
     <!-- print CSS -->
-    <link href="{{ asset(mix('/css/print.css')) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/print.css') }}" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,7 +35,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
-        var hash = '{{session('user_session_sha1')}}';
+        var hash = 'f51d28b';
         var institute_category = '{{$institute_category}}';
     </script>
    <!-- Child Page css goes here  -->
@@ -99,13 +100,13 @@
 </div>
 <!-- ./wrapper -->
 <!-- webpack menifest js -->
-<script src="{{ asset(mix('/js/manifest.js')) }}"></script>
+<script src="{{ asset('js/manifest.js') }}"></script>
 <!-- vendor libaries js -->
-<script src="{{ asset(mix('/js/vendor.js')) }}"></script>
+<script src="{{ asset('js/vendor.js') }}"></script>
 <!-- theme js -->
-<script src="{{ asset(mix('/js/theme.js')) }}"></script>
+<script src="{{ asset('js/theme.js') }}"></script>
 <!-- app js -->
-<script src="{{ asset(mix('/js/app.js')) }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
 <!-- Extra js from child page -->
 @yield("extraScript")

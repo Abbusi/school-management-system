@@ -34,3 +34,6 @@ class CreateSiteMetasTable extends Migration
         Schema::dropIfExists('site_metas');
     }
 }
+
+
+

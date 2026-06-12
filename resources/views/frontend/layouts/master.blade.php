@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<!-- style -->
 	<link rel="shortcut icon" href="@if($siteInfo['favicon']){{asset('storage/site/'.$siteInfo['favicon'])}} @else{{ asset('images/favicon.png') }}@endif">
-   <link rel="stylesheet" href="{{ asset(mix('/css/libs.css', 'frontend')) }}">
+   <link rel="stylesheet" href="{{ asset('frontend/css/libs.css') }}">
     <!--styles -->
 
     <!-- Child Page css goes here  -->
@@ -41,8 +41,8 @@
     @include('frontend.partial.footer')
 	<!-- / footer -->
 
-    <script src="{{ asset(mix('/js/jquery.min.js', 'frontend')) }}"></script>
-    <script src="{{ asset(mix('/js/libs.js', 'frontend')) }}"></script>
+    <script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/libs.js') }}"></script>
     @if($GA_TRACKING_ID)
     <!-- Google Analytics code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{$GA_TRACKING_ID}}"></script>

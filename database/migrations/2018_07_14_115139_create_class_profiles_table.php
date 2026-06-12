@@ -42,3 +42,6 @@ class CreateClassProfilesTable extends Migration
         Schema::dropIfExists('class_profiles');
     }
 }
+
+
+

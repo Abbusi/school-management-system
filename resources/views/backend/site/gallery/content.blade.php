@@ -35,7 +35,7 @@
             opacity: 1;
         }
         .thumbnail:hover .middle .remove-image {
-            color: #ff0000;
+            color: var(--fx-danger);
         }
     </style>
 @endsection

@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\AcademicYear;
+use App\Models\AcademicYear;
 use App\Http\Helpers\AppHelper;
-use App\IClass;
-use App\Mark;
-use App\Registration;
-use App\Section;
-use App\Student;
-use App\Subject;
-use App\User;
-use App\UserRole;
+use App\Models\IClass;
+use App\Models\Mark;
+use App\Models\Registration;
+use App\Models\Section;
+use App\Models\Student;
+use App\Models\Subject;
+use App\Models\User;
+use App\Models\UserRole;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -77,13 +77,10 @@ class StudentController extends Controller
                 ->get();
 
             //if section is mention then full this class section list
-            if($section_id){
-                $sections = Section::where('status', AppHelper::ACTIVE)
-                    ->where('class_id', $class_id)
-                    ->orderBy('name','asc')
-                    ->pluck('name', 'id');
-
-            }
+            $sections = Section::where('status', AppHelper::ACTIVE)
+                ->where('class_id', $class_id)
+                ->orderBy('name','asc')
+                ->pluck('name', 'id');
 
             $iclass = $class_id;
 

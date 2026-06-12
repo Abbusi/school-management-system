@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Exam;
-use App\ExamRule;
-use App\Grade;
+use App\Models\Exam;
+use App\Models\ExamRule;
+use App\Models\Grade;
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\AppHelper;
-use App\IClass;
-use App\Subject;
+use App\Models\IClass;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -637,3 +637,6 @@ class ExamController extends Controller
 
 
 }
+
+
+

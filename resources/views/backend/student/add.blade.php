@@ -31,8 +31,13 @@
                 <div class="box box-info">
                     <form novalidate id="entryForm" action="@if($regiInfo) {{URL::Route('student.update', $regiInfo->id)}} @else {{URL::Route('student.store')}} @endif" method="post" enctype="multipart/form-data">
                         <div class="box-header">
-                            <div class="callout callout-danger">
+                            <div class="callout callout-danger fx-callout-actions">
                                 <p><b>Note:</b> Create a class and section before create new student. And subject if student have elective subject.</p>
+                                <div class="fx-action-links">
+                                    <a href="{{ URL::route('academic.class_create') }}" class="btn btn-default btn-sm"><i class="fa fa-plus-circle"></i> Create class</a>
+                                    <a href="{{ URL::route('academic.section_create') }}" class="btn btn-default btn-sm"><i class="fa fa-plus-circle"></i> Create section</a>
+                                    <a href="{{ URL::route('academic.subject_create') }}" class="btn btn-default btn-sm"><i class="fa fa-plus-circle"></i> Create subject</a>
+                                </div>
                             </div>
                         </div>
                         <div class="box-body">

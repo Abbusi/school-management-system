@@ -9,6 +9,14 @@ class BackendMasterComposer
 {
     public function compose(View $view)
     {
+        if (auth()->check()) {
+            if (!session()->has('user_role_id') && auth()->user()->role) {
+                session(['user_role_id' => auth()->user()->role->role_id]);
+            }
+            if (!session()->has('user_session_sha1')) {
+                session(['user_session_sha1' => AppHelper::getUserSessionHash()]);
+            }
+        }
 
         // get app settings
         $appSettings = AppHelper::getAppSettings(null, true);
@@ -40,3 +48,6 @@ class BackendMasterComposer
         $view->with('institute_category', AppHelper::getInstituteCategory());
     }
 }
+
+
+

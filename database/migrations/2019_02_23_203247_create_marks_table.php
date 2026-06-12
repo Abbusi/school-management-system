@@ -52,3 +52,6 @@ class CreateMarksTable extends Migration
         Schema::dropIfExists('marks');
     }
 }
+
+
+

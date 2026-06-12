@@ -51,3 +51,6 @@ class CreateRegistrationsTable extends Migration
         Schema::dropIfExists('registrations');
     }
 }
+
+
+

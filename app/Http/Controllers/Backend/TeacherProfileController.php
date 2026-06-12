@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\TeacherProfile;
+use App\Models\TeacherProfile;
 
 class TeacherProfileController extends Controller
 {
@@ -110,3 +110,6 @@ class TeacherProfileController extends Controller
         return redirect()->route('teacher_profile.index')->with('success', 'Teacher profile deleted.');
     }
 }
+
+
+

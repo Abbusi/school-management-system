@@ -33,3 +33,6 @@ class CreateGradesTable extends Migration
         Schema::dropIfExists('grades');
     }
 }
+
+
+

@@ -35,3 +35,6 @@ class CreateTestimonialsTable extends Migration
         Schema::dropIfExists('testimonials');
     }
 }
+
+
+

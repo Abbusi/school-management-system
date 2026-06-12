@@ -32,68 +32,38 @@
     <!-- Main content -->
     <section class="content">
         @if($userRoleId == AppHelper::USER_ADMIN)
-            <div class="row">
-                <div class="col-lg-3 col-xs-6">
-                    <div class="small-box ">
-                        <a class="small-box-footer bg-orange-dark" href="{{URL::route('student.index')}}">
-                            <div class="icon bg-orange-dark" style="padding: 9.5px 18px 8px 18px;">
-                                <i class="fa icon-student"></i>
-                            </div>
-                            <div class="inner ">
-                                <h3 class="text-white">{{$students}} </h3>
-                                <p class="text-white">
-                                    Student </p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+            <div class="stat-grid">
+                <!-- Students Card -->
+                <x-kpi-card 
+                    :link="URL::route('student.index')" 
+                    :count="$students" 
+                    label="Students" 
+                    :delta="$studentDelta"
+                />
 
-                <div class="col-lg-3 col-xs-6">
-                    <div class="small-box ">
-                        <a class="small-box-footer bg-pink-light" href="{{URL::route('teacher.index')}}">
-                            <div class="icon bg-pink-light" style="padding: 9.5px 18px 8px 18px;">
-                                <i class="fa icon-teacher"></i>
-                            </div>
-                            <div class="inner ">
-                                <h3 class="text-white">
-                                    {{$teachers}} </h3>
-                                <p class="text-white">
-                                    Teacher </p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6">
-                    <div class="small-box ">
-                        <a class="small-box-footer bg-purple-light" href="{{URL::route('hrm.employee.index')}}">
-                            <div class="icon bg-purple-light" style="padding: 9.5px 18px 8px 18px;">
-                                <i class="fa icon-member"></i>
-                            </div>
-                            <div class="inner ">
-                                <h3 class="text-white">
-                                    {{$employee}} </h3>
-                                <p class="text-white">
-                                    Employee </p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <!-- Teachers Card -->
+                <x-kpi-card 
+                    :link="URL::route('teacher.index')" 
+                    :count="$teachers" 
+                    label="Teachers" 
+                    :delta="$teacherDelta"
+                />
 
-                <div class="col-lg-3 col-xs-6">
-                    <div class="small-box ">
-                        <a class="small-box-footer bg-teal-light" href="{{URL::route('academic.subject')}}">
-                            <div class="icon bg-teal-light" style="padding: 9.5px 18px 8px 18px;">
-                                <i class="fa icon-subject"></i>
-                            </div>
-                            <div class="inner ">
-                                <h3 class="text-white">
-                                    {{$subjects}} </h3>
-                                <p class="text-white">
-                                    Subject </p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <!-- Employees Card -->
+                <x-kpi-card 
+                    :link="URL::route('hrm.employee.index')" 
+                    :count="$employee" 
+                    label="Employees" 
+                    :delta="$employeeDelta"
+                />
+
+                <!-- Subjects Card -->
+                <x-kpi-card 
+                    :link="URL::route('academic.subject')" 
+                    :count="$subjects" 
+                    label="Subjects" 
+                    :delta="$subjectDelta"
+                />
             </div>
         @endif
 
@@ -145,7 +115,7 @@
 
 <!-- BEGIN PAGE JS-->
 @section('extraScript')
-    <script src="{{asset(mix('js/dashboard.js'))}}"></script>
+    <script src="{{asset('js/dashboard.js')}}"></script>
     <script type="text/javascript">
         @if($userRoleId != AppHelper::USER_STUDENT)
             window.attendanceLabel = @php echo json_encode(array_keys($attendanceChartPresentData)) @endphp;

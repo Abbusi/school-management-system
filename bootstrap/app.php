@@ -1,55 +1,67 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Create The Application
-|--------------------------------------------------------------------------
-|
-| The first thing we will do is create a new Laravel application instance
-| which serves as the "glue" for all the components of Laravel, and is
-| the IoC container for the system binding all of the various parts.
-|
-*/
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
-$app = new Illuminate\Foundation\Application(
-    realpath(__DIR__.'/../')
-);
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: [
+            __DIR__.'/../routes/web.php',
+            __DIR__.'/../routes/website.php',
+        ],
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware): void {
+        // Append Language middleware to the web group
+        $middleware->appendToGroup('web', \App\Http\Middleware\Language::class);
+        $middleware->appendToGroup('web', \App\Http\Middleware\HandleInertiaRequests::class);
 
-/*
-|--------------------------------------------------------------------------
-| Bind Important Interfaces
-|--------------------------------------------------------------------------
-|
-| Next, we need to bind some important interfaces into the container so
-| we will be able to resolve them when needed. The kernels serve the
-| incoming requests to this application from both the web and CLI.
-|
-*/
+        // Define the frontend middleware group
+        $middleware->appendToGroup('frontend', \App\Http\Middleware\Frontend::class);
 
-$app->singleton(
-    Illuminate\Contracts\Http\Kernel::class,
-    App\Http\Kernel::class
-);
+        // Register custom route middleware aliases
+        $middleware->alias([
+            'role' => \App\Http\Middleware\RoleMiddleware::class,
+            'permission' => \App\Http\Middleware\PermissionMiddleware::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions): void {
+        $exceptions->shouldRenderJsonWhen(
+            fn (Request $request) => $request->is('api/*'),
+        );
 
-$app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
-);
+        // Custom exception renderer for backward compatibility
+        $exceptions->render(function (\Throwable $exception, Request $request) {
+            if (method_exists($exception, 'getStatusCode')) {
+                $statusCode = $exception->getStatusCode();
 
-$app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
-);
+                if (!env('APP_DEBUG', false)) {
+                    if (!$request->user() && \App\Http\Helpers\AppHelper::isFrontendEnabled()) {
+                        $locale = \Illuminate\Support\Facades\Session::get('user_locale');
+                        \Illuminate\Support\Facades\App::setLocale($locale);
 
-/*
-|--------------------------------------------------------------------------
-| Return The Application
-|--------------------------------------------------------------------------
-|
-| This script returns the application instance. The instance is given to
-| the calling script so we can separate the building of the instances
-| from the actual running of the application and sending responses.
-|
-*/
+                        if ($statusCode == 404) {
+                            return response()->view('errors.front_404', [], 404);
+                        }
 
-return $app;
+                        if ($statusCode == 500) {
+                            return response()->view('errors.front_500', [], 500);
+                        }
+                    }
+                }
+
+                if ($request->user()) {
+                    if ($statusCode == 404) {
+                        return response()->view('errors.back_404', [], 404);
+                    }
+
+                    if ($statusCode == 401) {
+                        return response()->view('errors.back_401', [], 404);
+                    }
+                }
+            }
+        });
+    })->create();

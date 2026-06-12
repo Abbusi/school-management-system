@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Helpers\AppHelper;
-use App\Permission;
-use App\Registration;
-use App\User;
-use App\UserRole;
+use App\Models\Permission;
+use App\Models\Registration;
+use App\Models\User;
+use App\Models\UserRole;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\AcademicYear;
+use App\Models\AcademicYear;
 use Illuminate\Support\Facades\DB;
 
 
@@ -472,3 +472,6 @@ class AdministratorController extends Controller
     }
 
 }
+
+
+

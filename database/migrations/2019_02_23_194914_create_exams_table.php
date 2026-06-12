@@ -40,3 +40,6 @@ class CreateExamsTable extends Migration
         Schema::dropIfExists('exams');
     }
 }
+
+
+

@@ -44,3 +44,6 @@ class CreateStudentAttendancesTable extends Migration
         Schema::dropIfExists('student_attendances');
     }
 }
+
+
+

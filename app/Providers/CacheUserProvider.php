@@ -2,17 +2,11 @@
 
 namespace App\Providers;
 
-
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 use Illuminate\Support\Facades\Cache;
 
-
-/**
- * Class CacheUserProvider
- * @package App\Auth
- */
 class CacheUserProvider extends EloquentUserProvider
 {
     /**
@@ -32,3 +26,5 @@ class CacheUserProvider extends EloquentUserProvider
         return Cache::get("user.$identifier") ?? parent::retrieveById($identifier);
     }
 }
+
+

@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\AcademicYear;
-use App\Employee;
-use App\Exam;
-use App\ExamRule;
+use App\Models\AcademicYear;
+use App\Models\Employee;
+use App\Models\Exam;
+use App\Models\ExamRule;
 use App\Http\Helpers\AppHelper;
 use App\Http\Helpers\ReportHelper;
-use App\IClass;
-use App\EmployeeAttendance;
-use App\Leave;
-use App\Mark;
-use App\Registration;
-use App\Result;
-use App\Section;
-use App\StudentAttendance;
+use App\Models\IClass;
+use App\Models\EmployeeAttendance;
+use App\Models\Leave;
+use App\Models\Mark;
+use App\Models\Registration;
+use App\Models\Result;
+use App\Models\Section;
+use App\Models\StudentAttendance;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -581,3 +581,6 @@ class ReportController extends Controller
     }
 
 }
+
+
+

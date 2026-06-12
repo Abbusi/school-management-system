@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Employee;
-use App\EmployeeAttendance;
+use App\Models\Employee;
+use App\Models\EmployeeAttendance;
 use App\Http\Helpers\AppHelper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -243,3 +243,6 @@ class EmployeeAttendanceController extends Controller
     }
 
 }
+
+
+

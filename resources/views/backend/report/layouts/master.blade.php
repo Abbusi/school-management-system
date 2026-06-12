@@ -5,7 +5,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Report CSS -->
-    <link href="{{ asset(mix('/css/report.css')) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/report.css') }}" rel="stylesheet" type="text/css">
     <style>
         @if($text_color)
             *,

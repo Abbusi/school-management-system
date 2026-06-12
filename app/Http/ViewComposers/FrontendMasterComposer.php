@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\ViewComposers;
-use App\Event;
+use App\Models\Event;
 use App\Http\Helpers\AppHelper;
-use App\SiteMeta;
+use App\Models\SiteMeta;
 use Illuminate\Contracts\View\View;
 
 class FrontendMasterComposer
@@ -53,3 +53,5 @@ class FrontendMasterComposer
         $view->with('GA_TRACKING_ID', $GA_TRACKING_ID);
     }
 }
+
+

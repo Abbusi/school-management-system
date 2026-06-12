@@ -46,3 +46,6 @@ class CreateExamRulesTable extends Migration
         Schema::dropIfExists('exam_rules');
     }
 }
+
+
+

@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand & UI Colors */
+  --color-primary: #0F766E;
+  --color-primary-strong: #0B5C56;
+  --color-primary-tint: #DCEFEC;
+  --color-brand-mint: #46B8A7;
+
+  /* Neutrals (Cool Gray) */
+  --color-bg-page: #F4F6F7;
+  --color-bg-card: #FFFFFF;
+  --color-bg-subtle: #EAEEEF;
+
+  --color-border: #D4DBDC;
+
+  --color-text-primary: #18302C;
+  --color-text-secondary: #5C6B68;
+  --color-text-tertiary: #9AA7A4;
+
+  /* Fonts */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Custom Overrides for AdminLTE and Bootstrap to match Faxeed Design System Teal v2 */
+
+body {
+  font-family: var(--font-sans) !important;
+  background: var(--color-bg-page) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* 1. Page Background & Content Area */
+.content-wrapper, .right-side {
+  background-color: var(--color-bg-page) !important;
+}
+
+/* 2. Header / Top Navbar */
+.main-header {
+  background: var(--color-bg-card) !important;
+  border-bottom: 0.5px solid var(--color-border) !important;
+}
+.main-header .navbar {
+  background: var(--color-bg-card) !important;
+  border-bottom: 0.5px solid var(--color-border) !important;
+}
+.main-header .logo {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text-primary) !important;
+  border-right: 0.5px solid var(--color-border) !important;
+  border-bottom: 0.5px solid var(--color-border) !important;
+}
+.main-header .navbar .sidebar-toggle {
+  color: var(--color-text-secondary) !important;
+}
+.main-header .navbar .sidebar-toggle:hover {
+  background-color: var(--color-bg-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+.navbar-nav > li > a {
+  color: var(--color-text-secondary) !important;
+}
+.navbar-nav > li > a:hover {
+  background-color: var(--color-bg-subtle) !important;
+}
+
+/* 3. Sidebar */
+.main-sidebar, .left-side {
+  background: var(--color-bg-card) !important;
+  border-right: 0.5px solid var(--color-border) !important;
+  box-shadow: none !important;
+}
+.sidebar-menu {
+  background: transparent !important;
+}
+.sidebar-menu > li.header {
+  background: transparent !important;
+  color: var(--color-text-secondary) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  padding: 12px 15px 6px 15px !important;
+}
+.sidebar-menu > li > a {
+  color: var(--color-text-secondary) !important;
+  font-size: 13px !important;
+  border-left: none !important;
+  padding: 8px 15px !important;
+  transition: all 0.12s !important;
+  border-radius: 4px !important;
+  margin: 2px 8px !important;
+}
+.sidebar-menu > li > a:hover, 
+.sidebar-menu > li.active > a, 
+.sidebar-menu > li.menu-open > a {
+  background: var(--color-bg-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+.sidebar-menu > li.active > a {
+  color: var(--color-primary) !important;
+  font-weight: 500 !important;
+}
+.sidebar-menu .treeview-menu {
+  background: transparent !important;
+  padding-left: 10px !important;
+}
+.sidebar-menu .treeview-menu > li > a {
+  color: var(--color-text-secondary) !important;
+  font-size: 12px !important;
+  padding: 6px 15px !important;
+  border-radius: 4px !important;
+}
+.sidebar-menu .treeview-menu > li > a:hover,
+.sidebar-menu .treeview-menu > li.active > a {
+  color: var(--color-text-primary) !important;
+  background: var(--color-bg-subtle) !important;
+}
+
+/* 4. Boxes (Panels) */
+.box {
+  background: var(--color-bg-card) !important;
+  border: 0.5px solid var(--color-border) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+.box-header {
+  border-bottom: 0.5px solid var(--color-bg-subtle) !important;
+  color: var(--color-text-primary) !important;
+  padding: 15px !important;
+}
+.box-header .box-title {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  font-family: var(--font-sans) !important;
+}
+.box-body {
+  padding: 15px !important;
+}
+
+/* 5. Small Boxes (Stats widgets) */
+.small-box {
+  background: var(--color-bg-subtle) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  border: 0.5px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+  overflow: hidden !important;
+}
+.small-box .inner {
+  padding: 12px 16px !important;
+}
+.small-box h3 {
+  font-size: 22px !important;
+  font-weight: 500 !important;
+  color: var(--color-text-primary) !important;
+  margin: 0 0 6px 0 !important;
+}
+.small-box p {
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.06em !important;
+  color: var(--color-text-secondary) !important;
+  margin: 0 !important;
+}
+.small-box .icon {
+  display: none !important; /* Hide old large icons */
+}
+.small-box-footer {
+  background: transparent !important;
+  border-top: 0.5px solid var(--color-border) !important;
+  color: var(--color-primary) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  padding: 8px 16px !important;
+  text-align: left !important;
+  display: block !important;
+  text-decoration: none !important;
+}
+.small-box-footer:hover {
+  color: var(--color-primary-strong) !important;
+  background: rgba(15, 118, 110, 0.05) !important;
+}
+
+/* 6. Buttons */
+.btn {
+  font-family: var(--font-sans) !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 8px 18px !important;
+  box-shadow: none !important;
+  transition: all 0.12s !important;
+}
+.btn-primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-bg-page) !important;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+  background-color: var(--color-primary-strong) !important;
+  border-color: var(--color-primary-strong) !important;
+}
+.btn-default, .btn-outline {
+  background: transparent !important;
+  color: var(--color-text-secondary) !important;
+  border: 0.5px solid var(--color-border) !important;
+}
+.btn-default:hover {
+  background: var(--color-bg-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* 7. Tables */
+.table, table.dataTable {
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+.table th, table.dataTable th {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--color-text-secondary) !important;
+  border-bottom: 0.5px solid var(--color-border) !important;
+  padding: 8px 10px !important;
+}
+.table td, table.dataTable td {
+  font-size: 13px !important;
+  color: var(--color-text-primary) !important;
+  border-bottom: 0.5px solid var(--color-bg-subtle) !important;
+  padding: 10px 10px !important;
+}
+.table tbody tr:hover td {
+  background-color: var(--color-bg-subtle) !important;
+}
+
+/* Remove dropshadows from dialogs/modals */
+.modal-content {
+  border-radius: 16px !important;
+  border: 0.5px solid var(--color-border) !important;
+  box-shadow: none !important;
+}

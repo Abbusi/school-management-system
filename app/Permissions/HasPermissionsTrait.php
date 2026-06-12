@@ -1,8 +1,8 @@
 <?php
 namespace App\Permissions;
 
-use App\Permission;
-use App\Role;
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Support\Facades\Cache;
 
 trait HasPermissionsTrait {
@@ -29,15 +29,20 @@ trait HasPermissionsTrait {
     }
 
     public function hasPermissionThroughRole($permission) {
+        $rawRoles = Cache::rememberForever('permission_role'.$permission->id, function() use($permission) {
+            return $permission->roles()->get()->map(function ($role) {
+                return $role->getAttributes();
+            })->toArray();
+        });
 
-        $permissionRoles = Cache::rememberForever('permission_role'.$permission->id, function() use($permission) {
-            return $permission->roles()->get();
+        $permissionRoles = collect($rawRoles)->map(function ($attributes) {
+            return (new Role)->newFromBuilder($attributes);
         });
 
         $roles = $this->getRoles();
 
         foreach ($permissionRoles as $role){
-            if($roles->contains($role)) {
+            if($roles->contains('id', $role->id)) {
                 return true;
             }
         }
@@ -49,7 +54,6 @@ trait HasPermissionsTrait {
     }
 
     protected function hasPermission($permission) {
-
         $that = $this;
         $cache_key_user = "permission_".auth()->user()->id."_".$permission->id;
         $hasPermission =  Cache::rememberForever($cache_key_user, function() use($that, $permission) {
@@ -62,9 +66,17 @@ trait HasPermissionsTrait {
 
     protected function getRoles() {
         $that = $this;
-        return Cache::rememberForever('roles'.auth()->user()->id, function() use($that) {
-            return $that->roles()->get();
+        $raw = Cache::rememberForever('roles'.auth()->user()->id, function() use($that) {
+            return $that->roles()->get()->map(function ($role) {
+                return $role->getAttributes();
+            })->toArray();
+        });
+
+        return collect($raw)->map(function ($attributes) {
+            return (new Role)->newFromBuilder($attributes);
         });
     }
 
 }
+
+

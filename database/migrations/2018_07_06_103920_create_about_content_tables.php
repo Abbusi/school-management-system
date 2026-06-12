@@ -57,3 +57,6 @@ class CreateAboutContentTables extends Migration
         Schema::dropIfExists('about_sliders');
     }
 }
+
+
+
